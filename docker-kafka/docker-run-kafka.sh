@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker run -i \
+docker run -d \
        --name kafka \
        -p 9092:9092 \
        --link zookeeper:zk \
