@@ -1,0 +1,21 @@
+---
+- hosts: all
+  remote_user: ansible
+  tasks:
+  - name: install docker-py
+    sudo: yes
+    apt:
+      name: python-docker
+  - name: make jenkins home
+    sudo: yes
+    file:
+      path: /opt/jenkins_home
+      state: directory
+      mode: 0777
+  - name: docker jenkins
+    docker:
+      name: jenkins
+      image: picasso-mna/jenkins
+      ports: "8080:8080"
+      volumes:
+        - "/opt/jenkins_home:/var/jenkins_home"
