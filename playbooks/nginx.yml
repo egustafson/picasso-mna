@@ -1,0 +1,13 @@
+---
+- hosts: all
+  remote_user: ansible
+  tasks:
+  - name: install docker-py
+    sudo: yes
+    apt:
+      name: python-docker
+  - name: docker picasso nginx
+    docker:
+      name:  nginx
+      image: egustafson/nginx
+      ports: "80:80"

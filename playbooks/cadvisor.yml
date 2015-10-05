@@ -1,0 +1,18 @@
+---
+- hosts: all
+  remote_user: ansible
+  tasks:
+  - name: install docker-py
+    sudo: yes
+    apt:
+      name: python-docker
+  - name: docker cadvisor
+    docker:
+      name: cadvisor
+      image: google/cadvisor:latest
+      ports: "8000:8080"
+      volumes:
+        - "/:/rootfs:ro"
+        - "/var/run:/var/run:rw"
+        - "/sys:/sys:ro"
+        - "/var/lib/docker:/var/lib/docker:ro"
